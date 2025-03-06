@@ -1,0 +1,77 @@
+@if ( cartDetails.totalCartPrice) {
+
+    <h1 class="text-center text-green-600 text-4xl mt-10 mb-4">🛒 Shop Cart</h1>
+<section class="m-sec-style w-[75%] mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
+
+    <div class="flex justify-between items-center border-b pb-4 mb-4">
+        <h3 class="text-green-600 text-xl font-semibold">Total Cart Price: <span class="text-green-600">{{cartDetails.totalCartPrice}}</span> EGP</h3>
+        <button (click)="confirmClearCart()" 
+        class="bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg px-6 py-3 shadow-md transition-all ">
+        🗑 Clear Cart
+        </button>
+    </div>
+
+    @for (prod of cartDetails.products; track prod.product._id) {
+    <div class="grid md:grid-cols-[12%_minmax(0,1fr)] gap-6 border-b py-4 items-center">
+        <div class="flex justify-center">
+            <img [src]="prod.product.imageCover" class="w-24 h-24 object-cover rounded shadow-md" [alt]="prod.product.title">
+        </div>
+
+        <div class="flex justify-between items-center w-full">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">{{prod.product.title}}</h3>
+                <h4 class="text-green-600 font-medium">💰 Price: {{prod.price}} EGP</h4>
+                <button (click)="removeItem(prod.product._id)" 
+                class="text-red-600 hover:text-red-700 transition-all font-medium">
+                    <i class="fas fa-trash-can"></i> Remove
+                </button>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button (click)="updateItem(prod.product.id , prod.count + 1 )" 
+                class="text-3xl text-green-600 hover:text-green-700 transition-all transform hover:scale-110">
+                    <i class="fa-regular fa-square-plus"></i>
+                </button>
+                <span class="text-lg font-medium">{{prod.count}}</span>
+                <button (click)="updateItem(prod.product.id , prod.count - 1 )" 
+                class="text-3xl text-green-600 hover:text-green-700 transition-all transform hover:scale-110">
+                    <i class="fa-regular fa-square-minus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
+    <button [routerLink] ="['/checkout' , cartDetails._id ]"
+    class="bg-green-600 mx-auto hover:bg-green-700 text-white  text-base py-3 px-6 rounded-lg shadow-md transition-all  mt-6 flex items-center gap-2">
+    ✅ Check Out
+    </button>
+</section>
+
+
+}@else {
+
+    <section class="flex flex-col justify-center items-center py-16 bg-white rounded-lg w-[75%] mx-auto my-8">
+        <img src="images/cart.png" 
+             alt="Empty Cart" 
+             class="w-24 h-24 mb-6 opacity-80">
+    
+        <h1 class="text-center text-3xl text-gray-800 font-semibold mb-4">
+            Your Cart Is <span class="text-green-600">Empty!</span>
+        </h1>
+        
+        <p class="text-center text-gray-600 mb-6">
+            Looks like you haven't added anything to your cart yet.
+        </p>
+    
+        <button [routerLink]="['/products']"
+            class="bg-green-600 hover:bg-green-700 text-white text-lg py-3 px-8 rounded-lg shadow-md transition-all flex items-center gap-2">
+            🛍️ Go Shopping
+        </button>
+    </section>
+    
+    
+    
+    
+ 
+}

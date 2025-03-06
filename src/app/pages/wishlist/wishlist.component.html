@@ -1,0 +1,58 @@
+<section>
+  <div class="container mx-auto px-10 py-10">
+   
+    
+    <ng-container *ngIf="wishlistDetails && wishlistDetails.length > 0; else noWishlist">
+      <h2 class="text-4xl pb-5 text-center">Your Wishlist ❤️</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        <div *ngFor="let product of wishlistDetails" class="card border border-green-500/50 rounded-md overflow-hidden shadow relative group">
+          <div >
+            <div class="card-img relative">
+              <img [src]="product.imageCover" class="w-full h-[250px] object-contain" [alt]="product.title">
+            </div>
+            <div class="card-body px-2 py-4">
+              <h4 class="text-green-600 text-xs"> {{ product.category.name || 'Uncategorized' }} </h4>
+              <h3 class="font-medium"> {{ product.title.split(" ", 2).join(" ") }} </h3>
+              <div class="flex items-center justify-between">
+                <span> {{ product.price }} EGP</span>
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-300"></i>
+                  <span class="text-gray-500 ml-1"> {{ product.ratingsAverage }} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button (click)="removeWishlistItem(product.id); $event.stopPropagation()" 
+            class="absolute top-2 right-2 text-red-500 text-2xl">
+            <i class="fas fa-heart-broken"></i>
+          </button>
+
+          <button (click)="addCartItem(product.id); $event.stopPropagation()" 
+            class="bg-green-600 text-white py-2 px-10 border rounded w-[90%] mx-auto block opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out">
+            Add To Cart
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>
+
+<ng-template #noWishlist>
+  <section class="flex flex-col justify-center items-center py-16 bg-white rounded-lg w-[75%] mx-auto my-8">
+    <i class="fas fa-heart-broken text-red-600 text-6xl mb-6 opacity-80"></i>
+
+    <h1 class="text-center text-3xl text-gray-800 font-semibold mb-4">
+        Your Wishlist Is <span class="text-green-600">Empty!</span>
+    </h1>
+    
+    <p class="text-center text-gray-600 mb-6">
+        Looks like you haven't added any favorite products yet.
+    </p>
+
+    <button [routerLink]="['/products']"
+        class="bg-green-600 hover:bg-green-700 text-white text-lg py-3 px-8 rounded-lg shadow-md transition-all flex items-center gap-2">
+        ❤️ Browse Products
+    </button>
+  </section>
+</ng-template>

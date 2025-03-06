@@ -1,0 +1,88 @@
+<section class="w-11/12 sm:w-3/5 lg:w-2/5 max-w-xl mx-auto bg-gray-50 p-8 rounded-lg border shadow-xl my-8">
+    <h1 class="text-4xl font-semibold text-center text-green-600 mb-6">Check Out</h1>
+    <form [formGroup]="checkOutForm" (ngSubmit)="submitForm()">
+
+        <!-- Details Field -->
+        <div class="mb-4">
+            <label for="details" class="block mb-2 text-sm font-medium text-gray-900">Details</label>
+            <textarea formControlName="details" id="details" 
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-3"></textarea>
+            
+            @if (checkOutForm.get('details')?.errors && checkOutForm.get('details')?.touched) {
+                <div class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                    <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <div>
+                        <span class="font-medium">Error:</span>
+                        <ul class="mt-1.5 list-disc list-inside">
+                            @if (checkOutForm.get('details')?.getError('required')) {
+                                <li>The details field is required.</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Phone Field -->
+        <div class="mb-4">
+            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Phone</label>
+            <input type="tel" formControlName="phone" id="phone"
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-3">
+
+            @if (checkOutForm.get('phone')?.errors && checkOutForm.get('phone')?.touched) {
+                <div class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                    <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <div>
+                        <span class="font-medium">Error:</span>
+                        <ul class="mt-1.5 list-disc list-inside">
+                            @if (checkOutForm.get('phone')?.getError('required')) {
+                                <li>The phone field is required.</li>
+                            }
+                            @if (checkOutForm.get('phone')?.getError('pattern')) {
+                                <li>Please enter a valid Egyptian phone number.</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- City Field -->
+        <div class="mb-4">
+            <label for="city" class="block mb-2 text-sm font-medium text-gray-900">City</label>
+            <input type="text" formControlName="city" id="city"
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-3">
+
+            @if (checkOutForm.get('city')?.errors && checkOutForm.get('city')?.touched) {
+                <div class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                    <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <div>
+                        <span class="font-medium">Error:</span>
+                        <ul class="mt-1.5 list-disc list-inside">
+                            @if (checkOutForm.get('city')?.getError('required')) {
+                                <li>The city field is required.</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="flex justify-between mt-6">
+           
+            <button type="submit"
+    class="bg-green-600 hover:bg-green-700 text-white font-semibold text-base py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 w-full mr-2 disabled:bg-gray-600"
+    [disabled]="checkOutForm.invalid">
+    Proceed to Payment
+</button>
+
+          
+        </div>
+    </form>
+</section>
