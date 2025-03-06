@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
