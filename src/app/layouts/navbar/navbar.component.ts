@@ -2,6 +2,7 @@ import { Component, inject, Input, input, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { CartService } from '../../core/services/cart/cart.service';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-navbar',
@@ -37,6 +38,12 @@ export class NavbarComponent implements OnInit {
  }
 
   readonly authService = inject(AuthService);
+
+
+  ngAfterViewInit() :void {
+    initFlowbite(); 
+  }
+
 
   
 
